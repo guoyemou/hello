@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="al">
+        <todo>
+            <todo-title slot="title" :title="title"></todo-title>
+            <todo-items slot="items" v-for="(itm,index) in items" :itm="itm"
+                :index="index" v-on:del="remove(index)"
+            ></todo-items>
+        </todo>
+    </div>
+<script>
+    Vue.component("todo",{
+        template: '<div>' +
+            '<slot name="title"></slot>'+
+            '<ul>' +
+            '<slot name="items"></slot>'+
+            '</ul>'+
+        '</div>'
+    })
+    Vue.component("todo-title",{
+        props: ['title'],
+        template: '<div>{{title}}</div>'
+    })
+    Vue.component("todo-items",{
+        props: ['itm','index'],
+        template: '<li>{{itm}}<button v-on:click="delete1">delete</button></li>',
+        methods:{
+            delete1:function (index){
+                this.$emit("del",index);
+            }
+        }
+    })
+    let vm = new Vue({
+        el: '#al',
+        data: {
+            title: '变化中',
+            items: ['1','2','3']
+        },
+        methods: {
+            remove:function (index){
+                this.items.splice(index,1);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

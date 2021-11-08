@@ -1,0 +1,1 @@
+(()=>{var r={23:(r,t)=>{t.sayHi=function(){document.write("你 好 吗 ？")}}},t={};(function e(o){var i=t[o];if(void 0!==i)return i.exports;var n=t[o]={exports:{}};return r[o](n,n.exports,e),n.exports})(23).sayHi()})();
